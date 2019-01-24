@@ -1,0 +1,44 @@
+{
+  "name": "lectureappbackend",
+  "version": "1.0.0",
+  "description": "Lecture App Backend",
+  "main": "app.js",
+  "scripts": {
+    "mongo:start": "docker run --name realworld-mongo -p 27017:27017 mongo & sleep 5",
+    "start": "node ./app.js",
+    "dev": "nodemon ./app.js",
+    "test": "newman run ./tests/api-tests.postman.json -e ./tests/env-api-tests.postman.json",
+    "stop": "lsof -ti :3000 | xargs kill",
+    "mongo:stop": "docker stop realworld-mongo && docker rm realworld-mongo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gothinkster/productionready-node-api.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "cors": "2.7.1",
+    "ejs": "2.4.1",
+    "errorhandler": "1.4.3",
+    "express": "^4.16.4",
+    "express-jwt": "^5.3.1",
+    "express-session": "^1.15.6",
+    "ical2json": "^1.2.0",
+    "jsonwebtoken": "^8.4.0",
+    "method-override": "^3.0.0",
+    "methods": "1.1.2",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.23",
+    "mongoose": "5.4.6",
+    "mongoose-unique-validator": "1.0.2",
+    "morgan": "^1.9.1",
+    "request": "^2.88.0",
+    "underscore": "1.8.3"
+  },
+  "devDependencies": {
+    "newman": "^3.8.2",
+    "nodemon": "^1.11.0"
+  }
+}
