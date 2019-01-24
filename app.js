@@ -5,9 +5,7 @@ var http = require('http'),
     bodyParser = require('body-parser'),
     session = require('express-session'),
     cors = require('cors'),
-    passport = require('passport'),
-    errorhandler = require('errorhandler'),
-    mongoose = require('mongoose');
+    errorhandler = require('errorhandler');
 
 var isProduction = process.env.NODE_ENV === 'production';
 
@@ -28,13 +26,6 @@ app.use(session({ secret: 'new', cookie: { maxAge: 60000 }, resave: false, saveU
 
 if (!isProduction) {
   app.use(errorhandler());
-}
-
-if(isProduction){
-  mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true});
-} else {
-  mongoose.connect('mongodb://localhost/testDB', { useNewUrlParser: true});
-  mongoose.set('debug', true);
 }
 
 app.use(require('./routes'));

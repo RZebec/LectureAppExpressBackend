@@ -4,7 +4,6 @@ jobs:
   build:
     docker:
       - image: circleci/node:8.9.3
-      - image: circleci/mongo:5.4.6
     steps:
       - checkout
       - run:
@@ -12,7 +11,7 @@ jobs:
           command: |
             yarn
             yarn run start & sleep 5
-            curl http://localhost:3000/api/tags
+            curl http://localhost:3000/api/courses
             yarn run test
       - run:
           name: Trigger integration tests
