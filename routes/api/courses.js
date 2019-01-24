@@ -15,21 +15,18 @@ router.get('/', function (req, res, next) {
       var courses = d.data.split('\n');
       var coursesJSON = [];
 
-      for (let i = 0; i < courses.length; i++) {
-        var entry = courses[i].split(';')
-        coursesJSON[i] = new Course()
-        coursesJSON[i].title = entry[0]
-        coursesJSON[i].calendarUrl = entry[1]
-      }
+      courses.forEach(data => {
+        var entry = data.split(';')
+        if (entry[0] !== "")
+          coursesJSON.push({
+            title: entry[0],
+            calendarUrl: entry[1]
+          })
+      });
 
       return res.json(coursesJSON)
     })
     .catch(next)
 });
-
-function Course() {
-  this.title;
-  this.calendarUrl;
-}
 
 module.exports = router;

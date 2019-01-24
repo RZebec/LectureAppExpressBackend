@@ -19,23 +19,22 @@ router.param('course', function(req, res, next, course){
 
                 var lecturesJSON = [];
 
-                for(let i = 0; i < courseCalendar.length; i++) {
-                    const lecture = courseCalendar[i];
-                    lecturesJSON[i] = new Lecture();
-                    lecturesJSON[i].UID = lecture.UID;
-                    lecturesJSON[i].Course = course;
-                    lecturesJSON[i].Location = lecture.LOCATION;
-                    lecturesJSON[i].Description = lecture.DESCRIPTION;
-                    lecturesJSON[i].Summary = lecture.SUMMARY;
-                    lecturesJSON[i].OrganisationDay = moment(lecture["DTSTART;TZID=Europe/Berlin"]).startOf('day').unix();
-                    lecturesJSON[i].Start = moment(lecture["DTSTART;TZID=Europe/Berlin"]).tz("Europe/Berlin").unix();
-                    lecturesJSON[i].End = moment(lecture["DTEND;TZID=Europe/Berlin"]).tz("Europe/Berlin").unix();
-                    lecturesJSON[i].Creation = moment(lecture["CREATED"]).tz("Europe/Berlin").unix();
-                    lecturesJSON[i].LastModified = moment(lecture["LAST-MODIFIED"]).tz("Europe/Berlin").unix();
-                }                
+                courseCalendar.forEach(lecture => {
+                    lecturesJSON.push({
+                        UID: lecture.UID,
+                        Course: course,
+                        Location: lecture.LOCATION,
+                        Description: lecture.DESCRIPTION,
+                        Summary: lecture.SUMMARY,
+                        OrganisationDay: moment(lecture["DTSTART;TZID=Europe/Berlin"]).startOf('day').unix(),
+                        Start: moment(lecture["DTSTART;TZID=Europe/Berlin"]).tz("Europe/Berlin").unix(),
+                        End: moment(lecture["DTEND;TZID=Europe/Berlin"]).tz("Europe/Berlin").unix(),
+                        Creation: moment(lecture["CREATED"]).tz("Europe/Berlin").unix(),
+                        LastModified: moment(lecture["LAST-MODIFIED"]).tz("Europe/Berlin").unix()
+                    })
+                });              
 
                 req.lectures = lecturesJSON
-    
                 return next();
             })
             .catch(next);
@@ -49,18 +48,5 @@ router.get('/:course', function(req, res, next) {
         return res.json({'Error': 'No Course selected.'})
     }  
 });
-
-function Lecture() {
-    this.UID;
-    this.Course;
-    this.Location;
-    this.OrganisationDay;
-    this.Start;
-    this.End;
-    this.Summary;
-    this.Creation;
-    this.LastModified;
-    this.Description;
-  }
 
 module.exports = router;
