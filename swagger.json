@@ -1,0 +1,120 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Lecture App Backend",
+    "description": "Lecture App Backend",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Lecture App Backend",
+      "description": "Lecture App Backend"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/events": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Get all Events of the StuV",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/events/byDay": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Get all Events of the StuV mapped to the Organisation Day",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/lectures/{course}": {
+      "parameters": [
+        {
+          "name": "course",
+          "in": "path",
+          "required": true,
+          "description": "Title of the Course",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Lectures"
+        ],
+        "summary": "Get all Lectures for the given Course",
+        "responses": {
+          "200": {
+            "description": "All Lectures were found",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/lectures/byDay/{course}": {
+      "parameters": [
+        {
+          "name": "course",
+          "in": "path",
+          "required": true,
+          "description": "Title of the Course",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Lectures"
+        ],
+        "summary": "Get all Lectures for the given Course mapped to the Organisation Day",
+        "responses": {
+          "200": {
+            "description": "All Lectures were found",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/courses": {
+      "get": {
+        "tags": [
+          "Courses"
+        ],
+        "summary": "Get all Courses with a corespondign Calender URL",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}

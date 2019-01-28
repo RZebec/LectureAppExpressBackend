@@ -5,7 +5,9 @@ var http = require('http'),
     bodyParser = require('body-parser'),
     session = require('express-session'),
     cors = require('cors'),
-    errorhandler = require('errorhandler');
+    errorhandler = require('errorhandler'),
+    swaggerUi = require('swagger-ui-express'),
+    swaggerDocument = require('./swagger.json');
 
 var isProduction = process.env.NODE_ENV === 'production';
 
@@ -24,11 +26,15 @@ app.use(express.static(__dirname + '/public'));
 
 app.use(session({ secret: 'new', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
 
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 if (!isProduction) {
   app.use(errorhandler());
 }
 
-app.use(require('./routes'));
+app.use(require('./routes'))
+
+require('./helpers/array-functions')
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
