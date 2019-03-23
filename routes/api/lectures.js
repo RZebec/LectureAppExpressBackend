@@ -34,6 +34,8 @@ router.param('course', function (req, res, next, course) {
                     })
             });
 
+            lecturesJSON.sort((a, b) => parseFloat(a.Start) - parseFloat(b.Start));
+
             req.lectures = lecturesJSON
             return next();
         })
