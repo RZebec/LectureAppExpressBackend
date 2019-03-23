@@ -66,7 +66,7 @@ router.get('/byDay', function (req, res, next) {
             var eventsCalendar = ical2json.convert(d.data).VCALENDAR[0].VEVENT
 
             eventsCalendar.forEach(event => {
-                if (event.hasOwnProperty("DTSTART;VALUE=DATE") && event.SUMMARY !== "") {
+                if (event.hasOwnProperty("DTSTART;VALUE=DATE") && event.hasOwnProperty("SUMMARY")) {
                     eventsJSON.push({
                         UID: event.UID,
                         Location: event.LOCATION,
@@ -79,7 +79,7 @@ router.get('/byDay', function (req, res, next) {
                         LastModified: moment(event["LAST-MODIFIED"]).tz("Europe/Berlin").unix() * 1000
                     })
                 }  
-                else if (event.hasOwnProperty("DTSTART") && event.SUMMARY !== "")
+                else if (event.hasOwnProperty("DTSTART") && event.hasOwnProperty("SUMMARY"))
                     eventsJSON.push({
                         UID: event.UID,
                         Location: event.LOCATION,

@@ -20,7 +20,7 @@ router.param('course', function (req, res, next, course) {
             var lecturesJSON = [];
 
             courseCalendar.forEach(lecture => {
-                if (lecture.SUMMARY !== "")
+                if (lecture.hasOwnProperty("SUMMARY"))
                     lecturesJSON.push({
                         UID: lecture.UID,
                         Location: lecture.LOCATION,
