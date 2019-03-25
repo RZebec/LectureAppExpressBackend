@@ -26,7 +26,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.use(session({ secret: 'new', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
 
-app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/survivalapi/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 if (!isProduction) {
   app.use(errorhandler());

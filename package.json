@@ -1,6 +1,6 @@
 {
-  "name": "lectureappbackend",
-  "version": "1.0.0",
+  "name": "survivalapi",
+  "version": "2.0.0",
   "description": "Lecture App Backend",
   "main": "app.js",
   "scripts": {
