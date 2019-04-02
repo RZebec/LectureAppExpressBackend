@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2.0.0",
-    "title": "Lecture App Backend",
+    "title": "Survival API",
     "description": "Lecture App Backend",
     "license": {
       "name": "MIT",
@@ -13,7 +13,7 @@
   "basePath": "/survivalapi",
   "tags": [
     {
-      "name": "Lecture App Backend",
+      "name": "Survival API",
       "description": "Lecture App Backend"
     }
   ],
